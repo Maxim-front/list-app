@@ -1,23 +1,27 @@
 import Component from "./Component.js";
 
 export default class RemoveButton extends Component {
-    _onClick = () => {
 
-    };
+    _value = ""
+
     constructor(selector) {
         super(selector);
         this.$element = document.querySelector(selector);
-
     }
 
     set onClick(handler) {
-        this._onClick = handler
-        this.$element.addEventListener("click", this._onClick);
+
+        this.$element.addEventListener("click", ({ target }) => {
+
+            if (target.id === "remove") {
+                this._value = target.closest("li").querySelector("div").textContent
+                handler()
+            }
+        });
     }
 
-
-    removeElement(string, searchResults) {
-        const index = searchResults.indexOf(string)
-        searchResults.splice(index, 1)
+    get value() {
+        return this._value
     }
+
 }

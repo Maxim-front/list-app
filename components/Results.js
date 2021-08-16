@@ -25,6 +25,12 @@ export default class Results extends Component {
         this.render();
     }
 
+    removeElement(value) {
+        const index = this._searchResults.indexOf(value)
+        this._searchResults.splice(index, 1)
+        this.render()
+    }
+
     render() {
         this.$element.innerHTML = this._searchResults.reduce((result, item) => {
             const newElement = `<li>
